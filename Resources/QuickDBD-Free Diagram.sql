@@ -30,6 +30,7 @@ CREATE TABLE "songs" (
     "albumID" int   NOT NULL,
     "artistID" int   NOT NULL,
     "song_name" varchar(100)   NOT NULL,
+    "top" varchar(10)   NOT NULL,
     CONSTRAINT "pk_songs" PRIMARY KEY (
         "songID"
      )
@@ -38,8 +39,8 @@ CREATE TABLE "songs" (
 CREATE TABLE "accoldes" (
     "ID" int   NOT NULL,
     "year" date   NOT NULL,
-    "ceremony" varchar(30)   NOT NULL,
-    "category" varchar(30)   NOT NULL,
+    "category" varchar(50)   NOT NULL,
+    "nominee" varchar(50)   NOT NULL,
     "results" varchar(15)   NOT NULL,
     "artistID" int   NOT NULL,
     "songID" int   NOT NULL,
