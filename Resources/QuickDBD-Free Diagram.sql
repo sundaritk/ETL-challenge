@@ -7,60 +7,43 @@
 -- two dots ('..' - without quotes).
 
 CREATE TABLE "artist" (
-    "artistID" int   NOT NULL,
-    "artist_name" varchar(35)   NOT NULL,
+    "artist_id" int   NOT NULL,
+    "artist_name" varchar(255)   NOT NULL,
     CONSTRAINT "pk_artist" PRIMARY KEY (
-        "artistID"
-     )
-);
-
-CREATE TABLE "album" (
-    "albumID" int   NOT NULL,
-    "artistID" int   NOT NULL,
-    "album_name" varchar(50)   NOT NULL,
-    "no_of_songs" int   NOT NULL,
-    "year" date   NOT NULL,
-    CONSTRAINT "pk_album" PRIMARY KEY (
-        "albumID"
+        "artist_id"
      )
 );
 
 CREATE TABLE "songs" (
-    "songID" int   NOT NULL,
-    "albumID" int   NOT NULL,
-    "artistID" int   NOT NULL,
-    "song_name" varchar(100)   NOT NULL,
-    "top" varchar(10)   NOT NULL,
-    CONSTRAINT "pk_songs" PRIMARY KEY (
-        "songID"
+    "artist_id" int   NOT NULL,
+    "title" varchar(255)   NOT NULL,
+    "year" int   NOT NULL,
+    "genre_id" int   NOT NULL
+);
+
+CREATE TABLE "genre" (
+    "genre_id" int   NOT NULL,
+    "genre" varchar(255)   NOT NULL,
+    CONSTRAINT "pk_genre" PRIMARY KEY (
+        "genre_id"
      )
 );
 
 CREATE TABLE "accoldes" (
-    "ID" int   NOT NULL,
     "year" date   NOT NULL,
-    "category" varchar(50)   NOT NULL,
-    "nominee" varchar(50)   NOT NULL,
-    "results" varchar(15)   NOT NULL,
-    "artistID" int   NOT NULL,
-    "songID" int   NOT NULL,
-    CONSTRAINT "pk_accoldes" PRIMARY KEY (
-        "ID"
-     )
+    "category" varchar(255)   NOT NULL,
+    "nominee" varchar(255)   NOT NULL,
+    "worker" varchar(400)   NOT NULL,
+    "winner" varchar(6)   NOT NULL,
+    "artist_id" int   NOT NULL
 );
 
-ALTER TABLE "album" ADD CONSTRAINT "fk_album_artistID" FOREIGN KEY("artistID")
-REFERENCES "artist" ("artistID");
+ALTER TABLE "songs" ADD CONSTRAINT "fk_songs_artist_id" FOREIGN KEY("artist_id")
+REFERENCES "artist" ("artist_id");
 
-ALTER TABLE "songs" ADD CONSTRAINT "fk_songs_albumID" FOREIGN KEY("albumID")
-REFERENCES "album" ("albumID");
+ALTER TABLE "songs" ADD CONSTRAINT "fk_songs_genre_id" FOREIGN KEY("genre_id")
+REFERENCES "genre" ("genre_id");
 
-ALTER TABLE "songs" ADD CONSTRAINT "fk_songs_artistID" FOREIGN KEY("artistID")
-REFERENCES "artist" ("artistID");
-
-ALTER TABLE "accoldes" ADD CONSTRAINT "fk_accoldes_artistID" FOREIGN KEY("artistID")
-REFERENCES "artist" ("artistID");
-
-ALTER TABLE "accoldes" ADD CONSTRAINT "fk_accoldes_songID" FOREIGN KEY("songID")
-REFERENCES "songs" ("songID");
+ALTER TABLE "accoldes" ADD CONSTRAINT "fk_accoldes_artist_id" FOREIGN KEY("artist_id")
+REFERENCES "artist" ("artist_id");
 
